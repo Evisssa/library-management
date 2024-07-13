@@ -5,7 +5,9 @@ import com.ev.library_management.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -36,4 +38,19 @@ public class BookService {
     }
 
 
+    public Set<String> searchByTag(Set<String> tags) {
+
+        List<String> isbn = bookRepository.findByTags(tags, tags.size());
+
+        System.out.println(isbn);
+
+        return isbn.stream().collect(Collectors.toSet());
+                /*
+                books.stream()
+                .filter(book -> book.getTags().containsAll(tags))
+                .map(Book::getIsbn)
+                .collect(Collectors.toSet());
+
+                 */
+    }
 }
