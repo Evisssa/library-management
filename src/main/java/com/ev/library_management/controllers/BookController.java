@@ -1,5 +1,6 @@
 package com.ev.library_management.controllers;
 
+import com.ev.library_management.models.BookRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,8 +17,12 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping("/store")
-    public String store(@RequestParam String isbn, @RequestParam Set<String> tags) {
-        return bookService.store(isbn, tags);
+    public String store(@RequestBody BookRequest bookRequest) {
+
+
+        return bookService.store(bookRequest.getIsbn(), bookRequest.getTags());
+
+
     }
 
 }

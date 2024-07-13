@@ -15,14 +15,24 @@ public class BookService {
     private BookRepository bookRepository;
 
     public String store(String isbn, Set<String> tags) {
-        if (isbn.length() != 13 || !isbn.matches("\\d{13}")) {
-            return "Error: ISBN number is in wrong format.";
-        }
-        if (tags == null || tags.isEmpty()) {
-            return "Error: No tags provided.";
-        }
-        bookRepository.save(new Book(isbn, tags));
-        return "Ok";
+
+            if(isbn == null){
+                return "Error in : ISBN is mandatory.";
+            }
+
+            if (isbn.length() != 13 || !isbn.matches("\\d{13}")) {
+                return "Error: ISBN number is in wrong format.";
+            }
+
+            if (tags == null || tags.isEmpty()) {
+                return "Error: No tags provided.";
+            }
+            bookRepository.save(new Book(isbn, tags));
+            return "Ok";
+
+
+
+
     }
 
 
