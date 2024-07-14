@@ -1,36 +1,69 @@
 package com.ev.library_management.services;
 
 import com.ev.library_management.models.Book;
+import com.ev.library_management.models.Tag;
 import com.ev.library_management.repositories.BookRepository;
+import com.ev.library_management.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class BookService {
 
-    //calls a method in the service to process the request.
     @Autowired
     private BookRepository bookRepository;
 
-    public String store(String isbn, Set<String> tags) {
+    @Autowired
+    private TagsRepository tagRepository;
 
-            if(isbn == null){
-                return "Error in : ISBN is mandatory.";
+
+    public String store(String isbn, Set<String> tagNames) {
+
+        try{
+
+            if (isbn == null || isbn.isEmpty()) {
+                return "Error: ISBN is mandatory.";
             }
 
             if (isbn.length() != 13 || !isbn.matches("\\d{13}")) {
-                return "Error: ISBN number is in wrong format.";
+                return "Error: ISBN number is in the wrong format.";
             }
 
-            if (tags == null || tags.isEmpty()) {
+            if (tagNames == null || tagNames.isEmpty()) {
                 return "Error: No tags provided.";
+
+
             }
-            bookRepository.save(new Book(isbn, tags));
-            return "Ok";
+
+            bookRepository.deleteBookTagsByIsbn(isbn);
+            Book book = new Book();
+            book.setIsbn(isbn);
+
+            Set<Tag> tags = new HashSet<>();
+            for (String tagName : tagNames) {
+                Tag tag = tagRepository.findByTagName(tagName);
+                if (tag == null) {
+                    tag = new Tag();
+                    tag.setTagName(tagName);
+                    tagRepository.save(tag);
+                }
+                tags.add(tag);
+            }
+            book.setTags(tags);
+            bookRepository.save(book);
+
+            return "OK";
+
+        }
+        catch (Exception e){
+            return "ERROR IN STORING! ";
+
+        }
+
+
 
 
 
@@ -42,15 +75,16 @@ public class BookService {
 
         List<String> isbn = bookRepository.findByTags(tags, tags.size());
 
-        System.out.println(isbn);
+        try {
+                if (tags == null || tags.isEmpty()|| isbn.isEmpty()) {
+                    return Collections.singleton("Error: No tags provided.");
+                }
+                return isbn.stream().collect(Collectors.toSet());
+        }
+        catch (Exception e){
+            return Collections.singleton("ERROR IN SEARCHING BY TAGS");
+        }
 
-        return isbn.stream().collect(Collectors.toSet());
-                /*
-                books.stream()
-                .filter(book -> book.getTags().containsAll(tags))
-                .map(Book::getIsbn)
-                .collect(Collectors.toSet());
 
-                 */
     }
 }

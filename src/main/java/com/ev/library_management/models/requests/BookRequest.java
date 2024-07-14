@@ -1,4 +1,4 @@
-package com.ev.library_management.models;
+package com.ev.library_management.models.requests;
 
 import lombok.Getter;
 import lombok.Setter;
