@@ -39,4 +39,4 @@ To get started with the project, follow these steps:
   4. Build and run the application.
 
 ## Running Tests
-To run the tests, use the following command: mvn test (Using Maven)
+To run the tests, use the following command: ** mvn test (Using Maven) **
