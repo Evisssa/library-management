@@ -46,8 +46,9 @@ I used a relational database to handle books and their tags efficiently.
 - Create a PostgreSQL database.
 - Configure the application properties (application.properties or .yaml) accordingly.
 ### 4. Build and run the application.
-Adding indexes will help speed up searches for books by ISBN and tags, ensuring fast and efficient retrieval. Run the following SQL commands to create the indexes:
+
 ### 5. Create Indexes to Optimize Performance:
+Adding indexes will help speed up searches for books by tags, ensuring fast and efficient retrieval to the users even for a large number of books. 
 
     CREATE INDEX idx_book_tags_book_isbn_tag_id ON book_tags(book_isbn, tag_id);
     CREATE INDEX idx_tags_tag_name ON tag(tag_name);
