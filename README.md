@@ -58,4 +58,5 @@ After setting up the indexes, you’re all set to build and run your application
 
 
 ## Running Tests
-To run the tests, use the following command:  mvn test (Using Maven)
+To run the tests (using Maven), use the following command: 
+    mvn test 
