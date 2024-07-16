@@ -37,10 +37,25 @@ http://localhost:9090/searchByTag
 
 ## Getting Started
 To get started with the project, follow these steps:
-  1. Clone the repository:  git clone https://github.com/yourusername/library-management.git
-  2. Navigate to the project directory: cd library-management
-  3. Set up your PostgreSQL database and configure the application properties accordingly.
-  4. Build and run the application.
+### 1. Clone the repository: 
+    git clone https://github.com/yourusername/library-management.git
+### 2. Navigate to the project directory: 
+    cd library-management
+### 3. Set up your PostgreSQL database and configure the application properties accordingly.
+    I used a relational database to handle books and their tags efficiently. 
+    -- Create a PostgreSQL database.
+    -- Configure the application properties (application.properties or .yaml) accordingly.
+### 4. Build and run the application.
+Adding indexes will help speed up searches for books by ISBN and tags, ensuring fast and efficient retrieval. Run the following SQL commands to create the indexes:
+### 5. Create Indexes to Optimize Performance:
+
+
+CREATE INDEX idx_book_tags_book_isbn_tag_id ON book_tags(book_isbn, tag_id);
+CREATE INDEX idx_tags_tag_name ON tag(tag_name);
+CREATE INDEX idx_book_tags_tag_id_book_isbn ON book_tags(tag_id, book_isbn);
+
+After setting up the indexes, you’re all set to build and run your application. Use your preferred tools or commands to get everything up and running.
+
 
 ## Running Tests
 To run the tests, use the following command:  mvn test (Using Maven)
