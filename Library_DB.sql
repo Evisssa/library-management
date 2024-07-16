@@ -1,3 +1,4 @@
+/*
 CREATE TABLE book (
     isbn VARCHAR(13) PRIMARY KEY,
     title VARCHAR(255)
@@ -18,9 +19,14 @@ CREATE TABLE book_tags (
 	   
 );
 
-CREATE INDEX idx_Book_Tags_BookISBN ON Book_Tags(BookISBN);
-CREATE INDEX idx_Book_Tags_TagID ON Book_Tags(TagID);
-CREATE INDEX idx_Tags_TagName ON Tags(TagName);
+
+ */
+
+
+
+CREATE INDEX idx_book_tags_book_isbn_tag_id ON book_tags(book_isbn, tag_id);
+CREATE INDEX idx_tags_tag_name ON tag(tag_name);
+CREATE INDEX idx_book_tags_tag_id_book_isbn ON book_tags(tag_id, book_isbn);
 
 
 

@@ -3,7 +3,7 @@ package com.ev.library_management.services;
 import com.ev.library_management.models.Book;
 import com.ev.library_management.models.Tag;
 import com.ev.library_management.repositories.BookRepository;
-import com.ev.library_management.repositories.TagsRepository;
+import com.ev.library_management.repositories.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class BookService {
     private BookRepository bookRepository;
 
     @Autowired
-    private TagsRepository tagRepository;
+    private TagRepository tagRepository;
 
 
     public String store(String isbn, Set<String> tagNames) {
@@ -73,10 +73,10 @@ public class BookService {
 
     public Set<String> searchByTag(Set<String> tags) {
 
-        List<String> isbn = bookRepository.findByTags(tags, tags.size());
-
         try {
-                if (tags == null || tags.isEmpty()|| isbn.isEmpty()) {
+            List<String> isbn = bookRepository.findByTags(tags, tags.size());
+
+            if (tags == null || tags.isEmpty()|| isbn.isEmpty()) {
                     return Collections.singleton("Error: No tags provided.");
                 }
                 return isbn.stream().collect(Collectors.toSet());

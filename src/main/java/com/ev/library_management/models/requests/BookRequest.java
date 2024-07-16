@@ -1,5 +1,6 @@
 package com.ev.library_management.models.requests;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class BookRequest {
 
     @NotBlank(message = "ISBN is mandatory")

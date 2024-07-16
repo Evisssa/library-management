@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.ev.library_management.services.BookService;
 
-import java.util.Collections;
 import java.util.Set;
 
 @RestController
@@ -23,6 +22,7 @@ public class BookController {
 
     @PostMapping("/searchByTag")
     public Set<String> searchByTag(@RequestBody TagsRequest tagsReq) {
+
             return bookService.searchByTag(tagsReq.getTags());
     }
 

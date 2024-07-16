@@ -18,7 +18,8 @@ public interface BookRepository extends JpaRepository<Book,String> {
             "JOIN tag t ON bt.tag_id = t.tag_id " +
             "WHERE t.tag_name IN :tags " +
             "GROUP BY b.isbn " +
-            "HAVING COUNT(DISTINCT t.tag_name) = :tagCount ",nativeQuery = true)
+            "HAVING COUNT(DISTINCT t.tag_name) = :tagCount "+
+            "ORDER BY b",nativeQuery = true)
     List<String> findByTags(Set<String> tags, long tagCount);
 
 
