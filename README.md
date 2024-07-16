@@ -13,6 +13,7 @@ Requirements:
   - Endpoints:
 #### POST 
 http://localhost:9090/store
+  
     Body:
     {
         "isbn": "1111111111111",
@@ -28,6 +29,7 @@ Requirements:
 
 #### POST 
 http://localhost:9090/searchByTag
+    
     Body:
     {
         "tags": ["Science"]
