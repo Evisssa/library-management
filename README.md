@@ -11,13 +11,14 @@ Requirements:
   - The ISBN must be a 13-digit numeric string.
   - Each book must have at least one tag.
   - Endpoints:
-
-#### POST http://localhost:9090/store
-Body:
-{
-    "isbn": "1111111111111",
-    "tags": ["Science", "Fiction"]
-}
+#### POST 
+http://localhost:9090/store
+    Body:
+    {
+        "isbn": "1111111111111",
+        "tags": ["Science", "Fiction"]
+    }
+    
 ### 2. Search Command
 The search command retrieves all books that contain a specific tag or a list of tags. For a book to be included in the results, it must contain all the tags provided in the search command.
 
@@ -25,11 +26,12 @@ Requirements:
   - There must be at least one tag provided.
   - Endpoints:
 
-#### POST http://localhost:9090/searchByTag
-Body:
-{
-    "tags": ["Science"]
-}
+#### POST 
+http://localhost:9090/searchByTag
+    Body:
+    {
+        "tags": ["Science"]
+    }
 
 ## Getting Started
 To get started with the project, follow these steps:
@@ -39,4 +41,4 @@ To get started with the project, follow these steps:
   4. Build and run the application.
 
 ## Running Tests
-To run the tests, use the following command: ** mvn test (Using Maven) **
+To run the tests, use the following command:  mvn test (Using Maven)
